@@ -9,7 +9,7 @@ import java.text.NumberFormat;
 // Course: CIS357
 // Due date: 7/12/2022
 // Name: Cody Syring
-// GitHub: https://github.com/syrin1cr/cis357-hw1-Syring
+// GitHub: https://github.com/syrin1cr/Hw2
 // Instructor: Il-Hyung Cho
 // Program description: This program will act like a cash register. It will add items to cart as you ask
 // Admin options are available for adding, removing, and modifying items.
