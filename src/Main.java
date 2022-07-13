@@ -68,10 +68,15 @@ public class Main {
         System.out.println("Thanks for using POST system. Goodbye.");
     }
 
-    /*
-    This function will get the list of all items on the register and reset the 'cart'
-    portion of the register. This will not remove the ID, Price, or Name. Only the
-    amount to buy
+    /* Gets Linked list of items and returns a Linked list of items
+     *This function will get the list of all items on the register and reset the 'cart'
+     *portion of the register. This will not remove the ID, Price, or Name. Only the
+     *amount to buy
+     */
+
+    /**
+     * @param itemList
+     * @return
      */
     static List<item> resetShop(List<item> itemList) {
         for (item x : itemList) {
@@ -80,11 +85,16 @@ public class Main {
         return itemList;
     }
 
-    /*
-    This function gets every item on the register as itemsList. It handles all the
-    tabbing for the output along with calling the required functions to output the
-    end sale information. It will also add the end sale total to the total register
-    sales.
+    /*Gets the List of items
+     *This function gets every item on the register as itemsList. It handles all the
+     *tabbing for the output along with calling the required functions to output the
+     *end sale information. It will also add the end sale total to the total register
+     *sales.
+     */
+
+    /**
+     * @param itemsList
+     * @throws IOException
      */
     static void printReceipt(List<item> itemsList) throws IOException {
         //These base formats what used from java Lanuage Tutorials. Slightly modified after.
@@ -145,8 +155,12 @@ public class Main {
         System.out.println("\n---------------------------\n");
     }
 
-    /*
-    This is to print a list of every item in the "store" if you will.
+    /*Gets the list of items and returns nothing.
+     *This is to print a list of every item in the "store" if you will.
+     */
+
+    /**
+     * @param itemsList
      */
     static void printList(List<item> itemsList) {
         //These base formats what used from java Lanuage Tutorials. Slightly modified after.
@@ -168,6 +182,11 @@ public class Main {
     addItemToCart function gets the entire item list. It will get a variable from the user
     will than ask the user how many of that item they want. It will call itself again
     incase the user wants to buy another item.
+     */
+
+    /**
+     * @param itemsList
+     * @throws IOException
      */
     static void addItemToCart(List<item> itemsList) throws IOException {
         String addToCart = "";
@@ -205,6 +224,16 @@ public class Main {
         }
     }
 
+    /*
+     *This function handles the choices in the "admin" screen.
+     * options are add, delete, modify or quit. It will also get the option from user
+     */
+
+    /**
+     * @param itemsList
+     * @return
+     * @throws IOException
+     */
     static List<item> bootAdmin(List<item> itemsList) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String userInput = "";
@@ -213,7 +242,7 @@ public class Main {
                 "Add: A\n" +
                 "Delete: D\n" +
                 "Modify: M\n" +
-                "Quite: Q\n" +
+                "Quit: Q\n" +
                 "Select Option: ");
 
         userInput = reader.readLine();
@@ -243,7 +272,15 @@ public class Main {
 
         return itemsList;
     }
+    /*Gets the List of items and returns a List of items
+     * This method handles all editing of an existing item.
+     */
 
+    /**
+     * @param itemList
+     * @return
+     * @throws IOException
+     */
     static List<item> modifyList(List<item> itemList) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String userInput = "";
@@ -307,6 +344,13 @@ public class Main {
         return itemList;
     }
 
+    /*
+     *this will print only the Id and name
+     */
+
+    /**
+     * @param itemList
+     */
     static void printIDandName(List<item> itemList) {
         System.out.println("ID\t Name");
         for (item x : itemList) {
@@ -342,6 +386,15 @@ public class Main {
         return itemList;
     }
 
+    /*
+     *This will check to see if theirs a Douplicate Item when adding or modifying items
+     */
+
+    /**
+     * @param itemList
+     * @param userInput
+     * @return
+     */
     static boolean checkDouplicate(List<item> itemList, String userInput) {
         for (item x : itemList) {
             if (userInput.equals(x.getId())) {
@@ -350,7 +403,15 @@ public class Main {
         }
         return false;
     }
+    /*
+     *This function will add new items to the list of items and send it back.
+     */
 
+    /**
+     * @param itemsList
+     * @return
+     * @throws IOException
+     */
     static List<item> addItem(List<item> itemsList) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String userInput = "";
@@ -387,10 +448,15 @@ public class Main {
         return itemsList;
     }
 
-    /**
+    /*
      * splitString gets a comma delimited string and will break it into a list.
      * It will than create an item and place the information in its home, sending
      * that single item back.
+     */
+
+    /**
+     * @param tempList
+     * @return
      */
     public static item splitString(String tempList) {
         item tempItem = new item();

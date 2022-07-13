@@ -1,52 +1,107 @@
 public class item {
-    /**Member Data*/
+    /**
+     * Member Data
+     */
     private String id;
     private String name;
     private double price;
     private int amount;
 
 
-    /**Constructor*/
-    public item(){
+    /**
+     * Constructor
+     */
+
+    public item() {
         id = "NOT SET";
         name = "NOTSET";
         price = 0;
         amount = 0;
     }
-    /**member function*/
-    public void resetCart(){
+
+    /*member function*/
+    public void resetCart() {
         amount = 0;
     }
     //takes a string converts it to int and saves it in the class variable id.
-    public void setId(String x){
+
+    /**
+     * @param x
+     */
+    public void setId(String x) {
         this.id = x;
     }
-    public void setName(String x){
+
+    /**
+     * @param x
+     */
+    public void setName(String x) {
         this.name = x;
     }
-    public void setPrice(String x){
+
+    /**
+     * @param x
+     */
+    public void setPrice(String x) {
         this.price = Double.parseDouble(x);
     }
-    public void setAmount(String x){
+
+    /**
+     * @param x
+     */
+    public void setAmount(String x) {
         this.amount = Integer.parseInt(x);
     }
 
-    public String getId(){
+    /**
+     * @return
+     */
+    public String getId() {
         return this.id;
     }
-    public String getName(){
+
+    /**
+     * @return
+     */
+    public String getName() {
         return this.name;
     }
-    public double getPrice(){
+
+    /**
+     * @return
+     */
+    public double getPrice() {
         return this.price;
     }
-    public int getAmount(){
+
+    /**
+     * @return
+     */
+    public int getAmount() {
         return this.amount;
     }
-    public void addToAmount(int x){
-        this.amount = this.amount+x;
+
+    /**
+     * @param x
+     */
+    public void addToAmount(int x) {
+        this.amount = this.amount + x;
     }
-    public double getTotalPrice(){
-        return this.amount*this.price;
+
+    /*
+     *This function will account for items that are not taxed.
+     */
+
+    /**
+     * @return
+     */
+    public double getTotalPrice() {
+        char firstChar = this.id.charAt((0));
+        if (firstChar == 'A') {
+            return this.amount * this.price;
+        } else {
+            return this.amount;
+        }
+
     }
 }
