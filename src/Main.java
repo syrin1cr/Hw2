@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.text.NumberFormat;
 
 // Homework 2: Sales Register Program 2.0
@@ -76,7 +73,10 @@ public class Main {
 
     /**
      * @param itemList
-     * @return
+     * @return Gets Linked list of items and returns a Linked list of items
+     * *This function will get the list of all items on the register and reset the 'cart'
+     * *portion of the register. This will not remove the ID, Price, or Name. Only the
+     * *amount to buy
      */
     static List<item> resetShop(List<item> itemList) {
         for (item x : itemList) {
@@ -125,7 +125,11 @@ public class Main {
                 System.out.print("\t");
                 System.out.format(formatInfo, x.getAmount(), x.getName(), "$", (x.getPrice() * x.getAmount()));
                 System.out.println();
-                total.addToTotal(x.getTotalPrice());
+                if (x.getId().charAt(0) == 'A') {
+                    total.addToTotalTaxed(x.getTotalPrice());
+                } else {
+                    total.addToTotalNotTaxed(x.getTotalPrice());
+                }
             }
         }
 
@@ -169,10 +173,14 @@ public class Main {
         String column3Format = "%-6.6s";   // fixed size 6 characters, right aligned
         String formatInfo = column1Format + " " + column2Format + " " + column3Format;
 
+
         System.out.println("\n---------------------------");
         System.out.format(formatInfo, "ID ", "Item Name  ", "Price\n");
         for (item x : itemsList) {
-            System.out.format(formatInfo, x.getId(), x.getName(), x.getPrice());
+            Formatter formatter = new Formatter();
+            formatter.format("%.2f", x.getPrice());
+            System.out.format(formatInfo, x.getId(), x.getName(), "$" + formatter);
+            formatter.close();
             System.out.println();
         }
         System.out.println("---------------------------\n");
@@ -207,7 +215,7 @@ public class Main {
                 for (item x : itemsList) {
                     if (addToCart.equals(x.getId())) {
                         foundItem = true;
-                        System.out.println("\t item name: " + x.getName());
+                        System.out.println("\titem name: " + x.getName());
                         System.out.print("Enter Quantity: \t");
                         addToCart = reader.readLine();
                         x.addToAmount(Integer.parseInt(addToCart));
@@ -332,6 +340,7 @@ public class Main {
                         } while (priceSet);
                         break;
                 }
+                System.out.println("---------------------------\n");
                 itemList.set(cnt, x);
                 return itemList;
             }
@@ -352,10 +361,12 @@ public class Main {
      * @param itemList
      */
     static void printIDandName(List<item> itemList) {
+        System.out.println("\n---------------------------");
         System.out.println("ID\t Name");
         for (item x : itemList) {
             System.out.println(x.getId() + "\t" + x.getName());
         }
+        System.out.println("---------------------------\n");
     }
 
     static List<item> deleteItem(List<item> itemList) throws IOException {
@@ -375,6 +386,7 @@ public class Main {
                 itemFound = true;
                 System.out.println("Item " + x.getId() + " removed");
                 itemList.remove(cnt);
+                System.out.println("---------------------------\n");
                 return itemList;
             }
             cnt++;
@@ -409,7 +421,7 @@ public class Main {
 
     /**
      * @param itemsList
-     * @return
+     * @return List<item>
      * @throws IOException
      */
     static List<item> addItem(List<item> itemsList) throws IOException {
@@ -417,6 +429,8 @@ public class Main {
         String userInput = "";
         boolean priceSet = true;
         item tempItem = new item();
+
+        System.out.println("\n---------------------------");
 
         System.out.println("Enter New Item Information");
         System.out.print("Item ID: ");
@@ -444,7 +458,7 @@ public class Main {
             }
         } while (priceSet);
         itemsList.add(tempItem);
-
+        System.out.println("---------------------------\n");
         return itemsList;
     }
 
@@ -456,7 +470,7 @@ public class Main {
 
     /**
      * @param tempList
-     * @return
+     * @return item
      */
     public static item splitString(String tempList) {
         item tempItem = new item();
@@ -471,6 +485,10 @@ public class Main {
     /*
     getData will grab all the information from the text file and send it back
     as a list to the main function.
+     */
+
+    /**
+     * @return List<item>
      */
     static List<item> getData() {
         List<item> allItems = new ArrayList<>();

@@ -93,15 +93,9 @@ public class item {
      */
 
     /**
-     * @return
+     * @return double (
      */
     public double getTotalPrice() {
-        char firstChar = this.id.charAt((0));
-        if (firstChar == 'A') {
-            return this.amount * this.price;
-        } else {
-            return this.amount;
-        }
-
+        return this.amount * this.price;
     }
 }

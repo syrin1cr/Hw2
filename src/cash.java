@@ -1,30 +1,36 @@
 public class cash {
     private final double SALESTAX = 1.06;
-    private double totalCost;
+    private double taxedTotalCost;
+    private double notTaxedTotalCost;
 
     public cash() {
-        totalCost = 0;
+        notTaxedTotalCost = 0;
+        taxedTotalCost = 0;
     }
 
     /**
      * @return
      */
     public double getTotalCost() {
-        return this.totalCost;
+        return this.notTaxedTotalCost + taxedTotalCost;
     }
 
     /**
      * @param x
      */
-    public void addToTotal(double x) {
-        this.totalCost = this.totalCost + x;
+    public void addToTotalTaxed(double x) {
+        this.taxedTotalCost = this.taxedTotalCost + x;
+    }
+
+    public void addToTotalNotTaxed(double x) {
+        this.notTaxedTotalCost = this.notTaxedTotalCost + x;
     }
 
     /**
      * @return
      */
     public double getTax() {
-        return totalCost * SALESTAX;
+        return taxedTotalCost * SALESTAX + notTaxedTotalCost;
     }
 
     /**
@@ -32,6 +38,6 @@ public class cash {
      * @return
      */
     public double getChange(double cashIn) {
-        return cashIn - totalCost;
+        return cashIn - getTax();
     }
 }
